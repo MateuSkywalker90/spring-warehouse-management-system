@@ -20,20 +20,20 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "warehouses")
+@Table(name = "customers")
 @EntityListeners(AuditingEntityListener.class)
-public class Warehouse implements Serializable {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 8)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "is_refrigerated", nullable = false)
-    private boolean isRefrigerated;
+    @Column(name = "address", nullable = false, length = 100)
+    private String address;
 
     @CreatedDate
     @Column(name = "create_date")
@@ -52,14 +52,14 @@ public class Warehouse implements Serializable {
     private String updatedBy;
 
     @ManyToOne
-    @JoinColumn(name = "id_inventory", nullable = false)
-    private Inventory inventory;
+    @JoinColumn(name = "id_delivery", nullable = false)
+    private Delivery delivery;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return Objects.equals(id, warehouse.id);
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id);
     }
 
     @Override
