@@ -1,7 +1,10 @@
 package com.mateus.warehouse_manegement_system.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,28 +18,22 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "system_users")
+@Table(name = "locations")
 @EntityListeners(AuditingEntityListener.class)
-public class SystemUser implements Serializable {
+public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "employee_registration", nullable = false, unique = true, length = 10)
-    private Long employeeRegistration;
+    @Column(name = "name", nullable = false, unique = true, length = 100)
+    private String name;
 
-    @Column(name = "username", nullable = false, length = 100)
-    private String username;
-
-    @Column(name = "password", nullable = false, length = 200)
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 25)
-    private Role role;
+    @Column(name = "address", nullable = false, length = 100)
+    private String address;
 
     @CreatedDate
     @Column(name = "create_date")
@@ -54,26 +51,19 @@ public class SystemUser implements Serializable {
     @Column(name = "update_by")
     private String updatedBy;
 
-    public enum Role {
-        ROLE_ADMIN, ROLE_WORKER, ROLE_ASSOCIATE
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_warehouse", nullable = false)
+    private Warehouse warehouse;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        SystemUser that = (SystemUser) o;
-        return Objects.equals(id, that.id);
+        Location location = (Location) o;
+        return Objects.equals(id, location.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "SystemUser{" +
-                "id=" + id +
-                '}';
     }
 }

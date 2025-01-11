@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WarehouseManegementSystemApplication {
+public class WarehouseManagementSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WarehouseManegementSystemApplication.class, args);
+		SpringApplication.run(WarehouseManagementSystemApplication.class, args);
 	}
 
 }
