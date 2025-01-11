@@ -20,17 +20,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "deliveries")
+@Table(name = "delivery_details")
 @EntityListeners(AuditingEntityListener.class)
-public class Delivery implements Serializable {
+public class DeliveryDetail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "sales_date")
-    private int salesDate;
+    @Column(name = "delivery_quantity")
+    private int deliveryQuantity;
+
+    @Column(name = "expected_date")
+    private LocalDateTime expectedDate;
+
+    @Column(name = "actual_date")
+    private LocalDateTime actualDate;
 
     @CreatedDate
     @Column(name = "create_date")
@@ -48,15 +54,11 @@ public class Delivery implements Serializable {
     @Column(name = "update_by")
     private String updatedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "id_delivery_detail", nullable = false)
-    private DeliveryDetail deliveryDetail;
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Delivery delivery = (Delivery) o;
-        return Objects.equals(id, delivery.id);
+        DeliveryDetail that = (DeliveryDetail) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

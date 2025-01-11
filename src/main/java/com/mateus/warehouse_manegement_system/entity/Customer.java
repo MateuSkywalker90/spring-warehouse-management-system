@@ -52,7 +52,7 @@ public class Customer implements Serializable {
     private String updatedBy;
 
     @ManyToOne
-    @JoinColumn(name = "id_delivery", nullable = false)
+    @JoinColumn(name = "id_delivery")
     private Delivery delivery;
 
     @Override
