@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mateus</groupId>
-	<artifactId>warehouse-manegement-system</artifactId>
+	<artifactId>warehouse-management-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>warehouse-manegement-system</name>
 	<description>An app to help people manage a warehouse</description>
