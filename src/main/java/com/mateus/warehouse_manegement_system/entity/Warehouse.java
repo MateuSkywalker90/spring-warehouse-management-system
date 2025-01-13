@@ -59,6 +59,10 @@ public class Warehouse implements Serializable {
     @JoinColumn(name = "id_delivery_detail", nullable = false)
     private DeliveryDetail deliveryDetail;
 
+    @ManyToOne
+    @JoinColumn(name = "id_order_detail")
+    private OrderDetail orderDetail;
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
