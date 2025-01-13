@@ -11,7 +11,6 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -20,24 +19,27 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "warehouses")
+@Table(name = "transfers")
 @EntityListeners(AuditingEntityListener.class)
-public class Warehouse implements Serializable {
+public class Transfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 8)
-    private String name;
+    @Column(name = "transfer_quantity")
+    private int transferQuantity;
 
-    @Column(name = "is_refrigerated", nullable = false)
-    private boolean isRefrigerated;
+    @Column(name = "expected_date")
+    private LocalDateTime expectedDate;
+
+    @Column(name = "sent_date")
+    private LocalDateTime sentDate;
 
     @CreatedDate
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
+    @Column(name = "received_date")
+    private LocalDateTime receivedDate;
 
     @LastModifiedDate
     @Column(name = "update_date")
@@ -51,27 +53,11 @@ public class Warehouse implements Serializable {
     @Column(name = "update_by")
     private String updatedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "id_inventory", nullable = false)
-    private Inventory inventory;
-
-    @ManyToOne
-    @JoinColumn(name = "id_delivery_detail", nullable = false)
-    private DeliveryDetail deliveryDetail;
-
-    @ManyToOne
-    @JoinColumn(name = "id_order_detail")
-    private OrderDetail orderDetail;
-
-    @ManyToOne
-    @JoinColumn(name = "id_transfer")
-    private Transfer transfer;
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return Objects.equals(id, warehouse.id);
+        Transfer transfer = (Transfer) o;
+        return Objects.equals(id, transfer.id);
     }
 
     @Override
