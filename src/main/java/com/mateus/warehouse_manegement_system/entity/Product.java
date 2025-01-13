@@ -11,7 +11,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -20,20 +20,41 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "warehouses")
+@Table(name = "products")
 @EntityListeners(AuditingEntityListener.class)
-public class Warehouse implements Serializable {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 8)
+    @Column(name = "code", nullable = false, length = 10, unique = true)
+    private String code;
+
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "is_refrigerated", nullable = false)
-    private boolean isRefrigerated;
+    @Column(name = "description", length = 200)
+    private String description;
+
+    @Column(name = "category", nullable = false, length = 100)
+    private String category;
+
+    @Column(name = "weight", nullable = false)
+    private BigDecimal weight;
+
+    @Column(name = "height", nullable = false)
+    private BigDecimal height;
+
+    @Column(name = "width", nullable = false)
+    private BigDecimal width;
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "refrigerated")
+    private boolean refrigerated;
 
     @CreatedDate
     @Column(name = "create_date")
@@ -52,16 +73,16 @@ public class Warehouse implements Serializable {
     private String updatedBy;
 
     @ManyToOne
-    @JoinColumn(name = "id_inventory")
-    private Inventory inventory;
+    @JoinColumn(name = "id_order_detail")
+    private OrderDetail orderDetail;
 
     @ManyToOne
     @JoinColumn(name = "id_delivery_detail")
     private DeliveryDetail deliveryDetail;
 
     @ManyToOne
-    @JoinColumn(name = "id_order_detail")
-    private OrderDetail orderDetail;
+    @JoinColumn(name = "id_inventory")
+    private Inventory inventory;
 
     @ManyToOne
     @JoinColumn(name = "id_transfer")
@@ -70,8 +91,8 @@ public class Warehouse implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return Objects.equals(id, warehouse.id);
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
     }
 
     @Override
