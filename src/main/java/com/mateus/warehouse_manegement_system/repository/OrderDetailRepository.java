@@ -1,7 +1,0 @@
-package com.mateus.warehouse_manegement_system.repository;
-
-import com.mateus.warehouse_manegement_system.entity.OrderDetail;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
-}
