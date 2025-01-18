@@ -10,7 +10,7 @@ import lombok.*;
 public class SystemUserResponseDto {
 
     private Long id;
-    private Long employeeRegistration;
+    private String employeeRegistration;
     private String username;
     private String role;
 }

@@ -14,6 +14,9 @@ public class SystemUserService {
 
     @Transactional
     public SystemUser save(SystemUser systemUser) {
+        if (systemUser.getRole() == null) {
+            systemUser.setRole(SystemUser.Role.ROLE_WORKER);
+        }
         return systemUserRepository.save(systemUser);
     }
 }

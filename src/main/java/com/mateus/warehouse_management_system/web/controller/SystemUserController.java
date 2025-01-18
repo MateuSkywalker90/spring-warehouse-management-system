@@ -22,7 +22,7 @@ public class SystemUserController {
 
     @PostMapping
     public ResponseEntity<SystemUserResponseDto> create(@RequestBody SystemUserCreateDto userCreateDto) {
-        SystemUser user = systemUserService.save(SystemUserMapper.toSystemUser(userCreateDto));
-        return ResponseEntity.status(HttpStatus.CREATED).body(SystemUserMapper.toResponseDto(user));
+        SystemUser responseUser = systemUserService.save(SystemUserMapper.toSystemUser(userCreateDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(SystemUserMapper.toResponseDto(responseUser));
     }
 }
