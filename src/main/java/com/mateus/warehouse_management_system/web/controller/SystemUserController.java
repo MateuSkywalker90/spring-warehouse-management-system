@@ -2,6 +2,9 @@ package com.mateus.warehouse_management_system.web.controller;
 
 import com.mateus.warehouse_management_system.entity.SystemUser;
 import com.mateus.warehouse_management_system.service.SystemUserService;
+import com.mateus.warehouse_management_system.web.dto.SystemUserCreateDto;
+import com.mateus.warehouse_management_system.web.dto.SystemUserResponseDto;
+import com.mateus.warehouse_management_system.web.dto.mapper.SystemUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +21,8 @@ public class SystemUserController {
     private final SystemUserService systemUserService;
 
     @PostMapping
-    public ResponseEntity<SystemUser> create(@RequestBody SystemUser systemUser) {
-        SystemUser user = systemUserService.save(systemUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    public ResponseEntity<SystemUserResponseDto> create(@RequestBody SystemUserCreateDto userCreateDto) {
+        SystemUser user = systemUserService.save(SystemUserMapper.toSystemUser(userCreateDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(SystemUserMapper.toResponseDto(user));
     }
 }

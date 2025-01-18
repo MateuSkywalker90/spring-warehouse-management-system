@@ -25,7 +25,7 @@ public class SystemUser implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "employee_registration", nullable = false, unique = true, length = 10)
+    @Column(name = "employee_registration", nullable = false, unique = true, length = 5)
     private Long employeeRegistration;
 
     @Column(name = "username", nullable = false, length = 100)
@@ -36,7 +36,7 @@ public class SystemUser implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
-    private Role role;
+    private Role role = Role.ROLE_WORKER;
 
     @CreatedDate
     @Column(name = "create_date")
